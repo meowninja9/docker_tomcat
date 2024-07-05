@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'java-tomcat-japanese'
         DOCKER_TAG = 'latest'
-        DOCKER_REGISTRY_URL = 'https://index.docker.io/v1/'
+        DOCKER_REGISTRY_URL = 'https://hub.docker.com/'
     }
 
     stages {
