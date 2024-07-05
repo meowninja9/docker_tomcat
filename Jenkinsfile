@@ -10,14 +10,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/amanygamel/docker_tomcat.git', credentialsId: '90406132-0908-4605-81c0-dc78b1657819'
+                git branch: 'main', url: 'https://github.com/meowninja9/docker_tomcat.git', credentialsId: 'e2563d2e-4f7c-4810-8e50-67d179c07ded'
             }
         }
 
         stage('Docker Login') {
             steps {
                 script {
-                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'docker-hub-credentials') {
+                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'c6901c3c-22f8-4857-9ed5-f8fa62af41ab') {
                         echo 'Logged in to Docker Hub'
                     }
                 }
@@ -51,7 +51,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'docker-hub-credentials') {
+                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'c6901c3c-22f8-4857-9ed5-f8fa62af41ab') {
                         docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}").push()
                     }
                 }
