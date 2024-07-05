@@ -17,7 +17,7 @@ pipeline {
         stage('Docker Login') {
             steps {
                 script {
-                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'c6901c3c-22f8-4857-9ed5-f8fa62af41ab') {
+                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'docker-hub-credentials') {
                         echo 'Logged in to Docker Hub'
                     }
                 }
@@ -51,7 +51,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'c6901c3c-22f8-4857-9ed5-f8fa62af41ab') {
+                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'docker-hub-credentials') {
                         docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}").push()
                     }
                 }
