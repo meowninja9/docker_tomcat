@@ -32,4 +32,20 @@ pipeline {
                     fi
                     '''
                     // Run the new container
-                    docker.image("${env.DOCKER_IMAGE}:${env.DOCK
+                    docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}").run('-d -p 8080:8080 --name tomcat')
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                sh 'docker ps -a'
+            }
+        }
+        cleanup {
+            cleanWs()
+        }
+    }
+}
