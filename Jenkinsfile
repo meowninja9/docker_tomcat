@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/amanygamel/docker_tomcat.git', credentialsId: 'your-credentials-id'
+                git branch: 'main', url: 'https://github.com/amanygamel/docker_tomcat.git', credentialsId: '90406132-0908-4605-81c0-dc78b1657819'
             }
         }
 
