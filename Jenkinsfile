@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/yourusername/your-repo.git'
+                git branch: 'main', url: 'https://github.com/amanygamel/docker_tomcat.git', credentialsId: 'your-credentials-id'
             }
         }
 
@@ -32,20 +32,4 @@ pipeline {
                     fi
                     '''
                     // Run the new container
-                    docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}").run('-d -p 8080:8080 --name tomcat')
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            script {
-                sh 'docker ps -a'
-            }
-        }
-        cleanup {
-            cleanWs()
-        }
-    }
-}
+                    docker.image("${env.DOCKER_IMAGE}:${env.DOCK
