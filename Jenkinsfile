@@ -14,15 +14,6 @@ pipeline {
             }
         }
 
-        stage('Docker Login') {
-            steps {
-                script {
-                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'docker-hub-credentials') {
-                        echo 'Logged in to Docker Hub'
-                    }
-                }
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
@@ -48,15 +39,6 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry("${env.DOCKER_REGISTRY_URL}", 'docker-hub-credentials') {
-                        docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}").push()
-                    }
-                }
-            }
-        }
     }
 
     post {
