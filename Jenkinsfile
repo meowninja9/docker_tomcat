@@ -2,23 +2,22 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'java-tomcat-japanese'
-        DOCKER_TAG = 'latest'
-        DOCKER_REGISTRY_URL = 'https://index.docker.io'
+        DOCKER_IMAGE = 'python3-image'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/meowninja9/docker_tomcat.git', credentialsId: 'e2563d2e-4f7c-4810-8e50-67d179c07ded'
+                // Checkout the repository containing the Dockerfile
+                checkout scm
             }
         }
-
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    def app = docker.build("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}")
+                    // Build the Docker image
+                    def dockerImage = docker.build("${DOCKER_IMAGE}")
                 }
             }
         }
@@ -31,17 +30,13 @@ pipeline {
                 }
             }
         }
-
     }
 
     post {
         always {
-            script {
-                sh 'docker images'
-            }
-        }
-        cleanup {
-            cleanWs()
+            // Clean up
+            sh 'docker rm -f python3-container || true'
+            sh 'docker rmi ${DOCKER_IMAGE} || true'
         }
     }
 }
